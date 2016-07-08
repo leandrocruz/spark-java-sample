@@ -1,5 +1,8 @@
 package de.mobile;
 
+import static spark.Spark.after;
+import static spark.Spark.port;
+
 import org.apache.avalon.framework.activity.Initializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +12,6 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import xingu.container.Inject;
-
-import static spark.Spark.port;
 
 public abstract class ApplicationSupport
 	implements Initializable
@@ -26,6 +27,10 @@ public abstract class ApplicationSupport
 	{
 		final int listenAt = 8000;
 		port(listenAt);
+		after((request, response) -> {
+		    response.header("Content-Encoding", "gzip");
+		});
+
 		registerRoutes();
 	}
 
