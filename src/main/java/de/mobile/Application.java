@@ -58,6 +58,7 @@ public class Application
 				.builder()
 				.name(name)
 				.age(Integer.parseInt(age))
+				.addFavoriteColors("blue", "gray", "green")
 				.build();
 	}
 
