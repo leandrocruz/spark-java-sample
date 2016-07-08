@@ -2,6 +2,8 @@ package de.mobile;
 
 import static spark.Spark.get;
 
+import java.io.InputStream;
+
 import de.mobile.domain.ImmutableSample;
 import spark.Request;
 import spark.Response;
@@ -15,8 +17,9 @@ public class Application
 	public static void main(String[] args)
 		throws Exception
 	{
+		final InputStream config = Thread.currentThread().getContextClassLoader().getResourceAsStream("pulga.xml");
 		ContainerUtils
-			.getContainer()
+			.getContainer(config)
 			.lookup(Factory.class)
 			.create(Application.class);
 	}
