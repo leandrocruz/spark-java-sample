@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.immutables.value.Value;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Value.Immutable
 public interface Sample
 {
@@ -11,5 +13,6 @@ public interface Sample
 	
 	int getAge();
 	
+	@JsonProperty("colors")
 	List<String> getFavoriteColors();
 }
