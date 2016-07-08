@@ -1,7 +1,7 @@
 package de.mobile;
 
 import static spark.Spark.after;
-import static spark.Spark.port;
+import static spark.Spark.*;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.slf4j.Logger;
@@ -28,6 +28,11 @@ public abstract class ApplicationSupport
 		port(8000);
 		after((request, response) -> response.header("Content-Encoding", "gzip"));
 		registerRoutes();
+	}
+	
+	public void shutdown()
+	{
+		stop();
 	}
 
 	protected abstract void registerRoutes()
