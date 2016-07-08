@@ -2,10 +2,6 @@ package de.mobile;
 
 import static org.junit.Assert.assertEquals;
 
-import java.awt.datatransfer.StringSelection;
-import java.util.Arrays;
-import java.util.StringJoiner;
-
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
