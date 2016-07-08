@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pulga>
+	<component	role="de.mobile.codec.Codec"
+				class="de.mobile.codec.impl.JacksonCodec" />
+</pulga>
