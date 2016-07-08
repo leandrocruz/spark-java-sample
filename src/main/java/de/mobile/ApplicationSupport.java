@@ -25,12 +25,8 @@ public abstract class ApplicationSupport
 	public void initialize()
 		throws Exception
 	{
-		final int listenAt = 8000;
-		port(listenAt);
-		after((request, response) -> {
-		    response.header("Content-Encoding", "gzip");
-		});
-
+		port(8000);
+		after((request, response) -> response.header("Content-Encoding", "gzip"));
 		registerRoutes();
 	}
 
