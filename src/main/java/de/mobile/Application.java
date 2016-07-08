@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.mobile.codec.Codec;
+import de.mobile.domain.ImmutableSample;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -36,8 +37,8 @@ public class Application
 	public void initialize()
 		throws Exception
 	{
-		get("/ok/:id", 	new RouteHandler((req, res) -> onOk(req, res)));
-		get("/err", 	new RouteHandler((req, res) -> onError(req, res)));
+		get("/customer/:name/:age", new RouteHandler((req, res) -> onOk(req, res)));
+		get("/err", 				new RouteHandler((req, res) -> onError(req, res)));
 
 	}
 
@@ -50,8 +51,14 @@ public class Application
 	private Object onOk(Request request, Response response)
 		throws Exception
 	{
-		final String id = request.params(":id");
-		return "ok: " + id;
+		final String age  = request.params(":age");
+		final String name = request.params(":name");
+
+		return ImmutableSample
+				.builder()
+				.name(name)
+				.age(Integer.parseInt(age))
+				.build();
 	}
 
 	class RouteHandler
