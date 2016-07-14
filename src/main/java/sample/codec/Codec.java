@@ -1,4 +1,4 @@
-package de.mobile.codec;
+package sample.codec;
 
 public interface Codec
 {

@@ -2,11 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>mobile.de</groupId>
-	<artifactId>sample-leandro</artifactId>
+	<groupId>leandrocruz</groupId>
+	<artifactId>spark-java-sample</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Mobile.de :: Sample Project :: Leandro Cruz</name>
+	<name>Spark Java Sample Project :: Leandro Cruz</name>
 	<dependencies>
 		<dependency>
 		    <groupId>ch.qos.logback</groupId>
@@ -97,7 +97,7 @@
 						<configuration>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>de.mobile.Application</mainClass>
+									<mainClass>sample.Application</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>

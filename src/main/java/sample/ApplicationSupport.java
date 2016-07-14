@@ -1,4 +1,4 @@
-package de.mobile;
+package sample;
 
 import static spark.Spark.after;
 import static spark.Spark.*;
@@ -7,7 +7,7 @@ import org.apache.avalon.framework.activity.Initializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.mobile.codec.Codec;
+import sample.codec.Codec;
 import spark.Request;
 import spark.Response;
 import spark.Route;

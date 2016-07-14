@@ -1,10 +1,10 @@
-package de.mobile.codec.impl;
+package sample.codec.impl;
 
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.mobile.codec.Codec;
+import sample.codec.Codec;
 
 public class JacksonCodec
 	implements Codec

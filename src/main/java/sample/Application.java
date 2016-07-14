@@ -1,10 +1,10 @@
-package de.mobile;
+package sample;
 
 import static spark.Spark.get;
 
 import java.io.InputStream;
 
-import de.mobile.domain.ImmutableSample;
+import sample.domain.ImmutableSample;
 import spark.Request;
 import spark.Response;
 import xingu.container.ContainerUtils;

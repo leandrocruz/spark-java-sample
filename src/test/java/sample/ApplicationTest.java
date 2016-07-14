@@ -1,4 +1,4 @@
-package de.mobile;
+package sample;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,6 +11,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
+import sample.Application;
 import xingu.container.ContainerUtils;
 import xingu.factory.Factory;
 
