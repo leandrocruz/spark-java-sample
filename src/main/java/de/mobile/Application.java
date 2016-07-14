@@ -17,7 +17,11 @@ public class Application
 	public static void main(String[] args)
 		throws Exception
 	{
-		final InputStream config = Thread.currentThread().getContextClassLoader().getResourceAsStream("pulga.xml");
+		final InputStream config = Thread
+				.currentThread()
+				.getContextClassLoader()
+				.getResourceAsStream("pulga.xml");
+
 		ContainerUtils
 			.getContainer(config)
 			.lookup(Factory.class)
@@ -29,7 +33,8 @@ public class Application
 		throws Exception
 	{
 		get("/customer/:name/:age", handle((req, res) -> onOk(req, res)));
-		get("/err", 				handle((req, res) -> onError(req, res)));	
+		get("/err", 				handle((req, res) -> onError(req, res)));
+		get("/nil", 				handle((req, res) -> null));	
 	}
 
 	Object onError(Request req, Response res)
