@@ -2,7 +2,7 @@ package sample.url;
 
 public interface UrlAnalyser
 {
-
-	UrlData analyse(String url);
+	UrlData analyse(String url)
+		throws UrlAnalyserException;
 
 }

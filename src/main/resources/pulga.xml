@@ -2,4 +2,7 @@
 <pulga>
 	<component	role="sample.codec.Codec"
 				class="sample.codec.impl.JacksonCodec" />
+
+	<component	role="sample.url.DocumentParser"
+				class="sample.url.impl.JSoupDocumentParser" />
 </pulga>
