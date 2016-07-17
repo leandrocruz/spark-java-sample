@@ -4,16 +4,19 @@ import static spark.Spark.get;
 
 import java.io.InputStream;
 
-import sample.domain.ImmutableSample;
+import sample.url.UrlAnalyser;
 import spark.Request;
 import spark.Response;
 import xingu.container.ContainerUtils;
+import xingu.container.Inject;
 import xingu.factory.Factory;
-import xingu.lang.NotImplementedYet;
 
 public class Application
 	extends ApplicationSupport
 {
+	@Inject
+	private UrlAnalyser analyser;
+	
 	public static void main(String[] args)
 		throws Exception
 	{
@@ -32,28 +35,13 @@ public class Application
 	protected void registerRoutes()
 		throws Exception
 	{
-		get("/customer/:name/:age", handle((req, res) -> onOk(req, res)));
-		get("/err", 				handle((req, res) -> onError(req, res)));
-		get("/nil", 				handle((req, res) -> null));	
+		get("/analyse/:url", handle((req, res) -> analyse(req, res)));
 	}
 
-	Object onError(Request req, Response res)
+	Object analyse(Request request, Response response)
 		throws Exception
 	{
-		throw new NotImplementedYet("sorry!");
-	}
-
-	Object onOk(Request request, Response response)
-		throws Exception
-	{
-		final String age  = request.params(":age");
-		final String name = request.params(":name");
-
-		return ImmutableSample
-				.builder()
-				.name(name)
-				.age(Integer.parseInt(age))
-				.addFavoriteColors("blue", "gray", "green")
-				.build();
+		final String url  = request.params(":url");
+		return analyser.analyse(url);
 	}
 }
