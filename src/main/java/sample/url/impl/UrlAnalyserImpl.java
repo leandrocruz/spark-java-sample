@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sample.url.DocumentParser;
 import sample.url.UrlAnalyser;
@@ -23,10 +25,13 @@ public class UrlAnalyserImpl
 	@Inject
 	private DocumentParser parser;
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Override
 	public UrlData analyse(String url)
 		throws UrlAnalyserException
 	{
+		logger.info("Analysing url: '{}'", url);
 		final URL         locator = urlFrom(url);
 		final InputStream input   = fetcher.fetch(locator);
 		final String      html    = toString(input);
