@@ -8,11 +8,9 @@ import sample.url.UrlFetcher;
 public class UrlFetcherImpl
 	implements UrlFetcher
 {
-
 	@Override
 	public InputStream fetch(URL locator)
 	{
 		return null;
 	}
-
 }

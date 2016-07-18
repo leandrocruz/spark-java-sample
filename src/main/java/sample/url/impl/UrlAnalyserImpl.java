@@ -1,15 +1,13 @@
 package sample.url.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.io.IOUtils;
 
 import sample.url.DocumentParser;
-import sample.url.ImmutableUrlData;
 import sample.url.UrlAnalyser;
 import sample.url.UrlAnalyserException;
 import sample.url.UrlData;
@@ -29,17 +27,33 @@ public class UrlAnalyserImpl
 	public UrlData analyse(String url)
 		throws UrlAnalyserException
 	{
-		final URL locator = urlFrom(url);
+		final URL    locator  = urlFrom(url);
 		final String protocol = locator.getProtocol();
-		if("http".equals(protocol) || "https".equals(protocol))
-		{
-			final InputStream input = fetcher.fetch(locator);
-			return parser.parse(input);
-		}
-		else
+		if(!"http".equals(protocol) && !"https".equals(protocol))
 		{
 			throw new UrlAnalyserException("Bad protocol: " + protocol);
-		}		
+		}
+
+		final InputStream input = fetcher.fetch(locator);
+		final String      html  = toString(input);
+		return parser.parse(html);
+	}
+
+	private String toString(InputStream input)
+	{
+		if(input == null)
+		{
+			return null;
+		}
+
+		try
+		{
+			return IOUtils.toString(input);
+		}
+		catch(IOException e)
+		{
+			throw new UrlAnalyserException("Error converting input to string");
+		}
 	}
 
 	private URL urlFrom(String url)
