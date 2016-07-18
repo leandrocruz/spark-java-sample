@@ -3,6 +3,6 @@
 	<component	role="sample.codec.Codec"
 				class="sample.codec.impl.JacksonCodec" />
 
-	<component	role="sample.url.DocumentParser"
-				class="sample.url.impl.JSoupDocumentParser" />
+	<component	role="sample.http.DocumentParser"
+				class="sample.http.impl.JSoupDocumentParser" />
 </pulga>

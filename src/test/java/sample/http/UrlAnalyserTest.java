@@ -1,4 +1,4 @@
-package sample.url;
+package sample.http;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -13,7 +13,13 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import sample.url.impl.JSoupDocumentParser;
+import sample.http.DocumentParser;
+import sample.http.Heading;
+import sample.http.Link;
+import sample.http.UrlAnalyser;
+import sample.http.UrlData;
+import sample.http.UrlFetcher;
+import sample.http.impl.JSoupDocumentParser;
 import xingu.container.Binder;
 import xingu.container.Inject;
 import xingu.container.XinguTestCase;

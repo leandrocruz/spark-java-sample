@@ -1,4 +1,4 @@
-package sample.url;
+package sample.http;
 
 import org.apache.commons.lang3.StringUtils;
 import org.immutables.value.Value;

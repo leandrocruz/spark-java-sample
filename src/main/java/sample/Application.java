@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sample.url.UrlAnalyser;
+import sample.http.UrlAnalyser;
 import spark.Request;
 import spark.Response;
 import xingu.container.ContainerUtils;

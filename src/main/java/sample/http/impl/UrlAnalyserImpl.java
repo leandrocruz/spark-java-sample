@@ -1,4 +1,4 @@
-package sample.url.impl;
+package sample.http.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,11 +9,11 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sample.url.DocumentParser;
-import sample.url.UrlAnalyser;
-import sample.url.UrlAnalyserException;
-import sample.url.UrlData;
-import sample.url.UrlFetcher;
+import sample.http.DocumentParser;
+import sample.http.UrlAnalyser;
+import sample.http.UrlAnalyserException;
+import sample.http.UrlData;
+import sample.http.UrlFetcher;
 import xingu.container.Inject;
 
 public class UrlAnalyserImpl

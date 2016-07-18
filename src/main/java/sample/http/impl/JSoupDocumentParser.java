@@ -1,4 +1,4 @@
-package sample.url.impl;
+package sample.http.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,13 +10,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
-import sample.url.DocumentParser;
-import sample.url.Heading;
-import sample.url.ImmutableHeading;
-import sample.url.ImmutableLink;
-import sample.url.ImmutableUrlData;
-import sample.url.Link;
-import sample.url.UrlData;
+import sample.http.DocumentParser;
+import sample.http.Heading;
+import sample.http.Link;
+import sample.http.UrlData;
+import sample.http.ImmutableHeading;
+import sample.http.ImmutableLink;
+import sample.http.ImmutableUrlData;
 import xingu.lang.NotImplementedYet;
 
 public class JSoupDocumentParser

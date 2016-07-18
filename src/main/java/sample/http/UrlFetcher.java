@@ -1,4 +1,4 @@
-package sample.url;
+package sample.http;
 
 import java.io.InputStream;
 import java.net.URL;

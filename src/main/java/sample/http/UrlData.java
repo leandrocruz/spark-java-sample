@@ -1,4 +1,4 @@
-package sample.url;
+package sample.http;
 
 import java.util.List;
 import java.util.Optional;

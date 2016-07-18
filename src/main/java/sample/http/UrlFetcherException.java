@@ -1,4 +1,4 @@
-package sample.url;
+package sample.http;
 
 public class UrlFetcherException
 	extends RuntimeException

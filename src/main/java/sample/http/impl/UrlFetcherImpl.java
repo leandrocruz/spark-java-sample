@@ -1,4 +1,4 @@
-package sample.url.impl;
+package sample.http.impl;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -6,8 +6,8 @@ import java.net.URL;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-import sample.url.UrlFetcher;
-import sample.url.UrlFetcherException;
+import sample.http.UrlFetcher;
+import sample.http.UrlFetcherException;
 
 public class UrlFetcherImpl
 	implements UrlFetcher

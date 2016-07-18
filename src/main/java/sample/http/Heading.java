@@ -1,4 +1,4 @@
-package sample.url;
+package sample.http;
 
 import org.immutables.value.Value;
 
