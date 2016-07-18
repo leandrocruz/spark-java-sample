@@ -101,7 +101,7 @@
                     
                     var location = window.location;
                     var ajax = this.$.ajax; 
-					ajax.url = location + 'analyse/' + url;
+					ajax.url = location + 'analyse?u=' + encodeURIComponent(url);
                 	ajax.generateRequest();
                 }
             }

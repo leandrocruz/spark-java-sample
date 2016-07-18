@@ -15,14 +15,14 @@ public class UrlFetcherImpl
 	@Override
 	public InputStream fetch(URL locator)
 	{
-		String url = locator.toString();
 		try
 		{
+			String url = locator.toExternalForm();
 			return Unirest.get(url).asBinary().getBody();
 		}
 		catch(UnirestException e)
 		{
-			throw new UrlFetcherException("Error fetching url: " + url + " -> " + e.getMessage(), e);
+			throw new UrlFetcherException(e.getMessage(), e);
 		}
 	}
 }

@@ -38,13 +38,13 @@ public class Application
 	protected void registerRoutes()
 		throws Exception
 	{
-		get("/analyse/:url", handle((req, res) -> analyse(req, res)));
+		get("/analyse", handle((req, res) -> analyse(req, res)));
 	}
 
 	Object analyse(Request request, Response response)
 		throws Exception
 	{
-		String url = request.params(":url");
+		String url = request.queryMap().get("u").value();
 		if(StringUtils.isEmpty(url))
 		{
 			throw new NotImplementedYet("Parameter 'url' is missing");

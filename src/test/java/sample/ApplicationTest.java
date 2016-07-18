@@ -37,7 +37,7 @@ public class ApplicationTest
 	public void testAnalyse()
 		throws Exception
 	{
-		final HttpResponse<JsonNode> resp = Unirest.get("http://localhost:8000/analyse/google.com").asJson();
+		final HttpResponse<JsonNode> resp = Unirest.get("http://localhost:8000/analyse?u=google.com").asJson();
 		assertEquals(200, resp.getStatus());
 		
 		final JSONObject obj = resp.getBody().getObject();
