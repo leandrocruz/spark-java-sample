@@ -1,0 +1,79 @@
+<link rel="import" href="../bower/paper-progress/paper-progress.html">
+<link rel="import" href="../bower/paper-input/paper-input.html">
+<link rel="import" href="../bower/paper-button/paper-button.html">
+<link rel="import" href="../bower/iron-ajax/iron-ajax.html">
+<script src="../bower/validator-js/validator.js"/></script>
+
+<dom-module id="the-app">
+    <template>
+        <link rel="stylesheet" href="../flex-layout-attribute.min.css">
+        <style>
+            :host {
+                display: block;
+            }
+            .container {
+                height: 300px;
+                width: 600px;
+                background-color: #fff;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+
+            paper-progress {
+                width: 100%;
+                --paper-progress-container-color: #fff;
+                --paper-progress-active-color: #9c27b0;
+            }
+
+            paper-button {
+                text-transform: lowercase;
+                background-color: #9c27b0;
+                color: white;
+            }
+
+            paper-input {
+                width: 350px;
+            }
+
+        </style>
+        <div class="container" layout="column justify-center">
+            <div></div>
+            <div layout="row center-spread">
+                <paper-input    id="input"  error-message="Invalid input!" label="Enter a valid url"></paper-input>
+                <paper-button   id="button" raised on-click="analyse">Analyse</paper-button>
+            </div>
+            <paper-progress     id="progress"></paper-progress>
+		</div>
+        <iron-ajax
+            id="ajax"
+            handle-as="json"
+            on-response="handleResponse"
+            debounce-duration="300"></iron-ajax>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: 'the-app',
+        isRunning: false,
+        analyse: function(e) {
+            var url = this.$.input.value;
+            this.$.input.invalid = !validator.isURL(url);
+            if(!this.isRunning)
+            {
+                if(!this.$.input.invalid)
+                {
+                    this.$.progress.indeterminate = true;
+                    this.$.button.innerHTML = 'stop';
+                    this.isRunning = true;
+                }
+            }
+            else
+            {
+                this.$.progress.indeterminate = false;
+                this.$.button.innerHTML = 'analyse';
+                this.isRunning = false;
+            }
+        }
+    });
+</script>
