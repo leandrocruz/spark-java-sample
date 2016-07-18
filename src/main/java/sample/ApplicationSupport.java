@@ -19,7 +19,7 @@ public abstract class ApplicationSupport
 	@Inject
 	protected Codec codec;
 	
-	private final Logger logger = LoggerFactory.getLogger(Application.class);
+	protected final Logger logger = LoggerFactory.getLogger(Application.class);
 
 	@Override
 	public void initialize()
@@ -74,7 +74,7 @@ public abstract class ApplicationSupport
 				logger.error("Error handling request", e);
 				response.status(500);
 				response.header("X-Reason", e.getMessage());
-				return "Error handling request: " + e.getMessage(); //maybe report the exception to the client?
+				return ""; //maybe report the exception to the client?
 			}
 		}
 	}

@@ -22,7 +22,7 @@ public class UrlFetcherImpl
 		}
 		catch(UnirestException e)
 		{
-			throw new UrlFetcherException("Error fetching url: " + url, e);
+			throw new UrlFetcherException("Error fetching url: " + url + " -> " + e.getMessage(), e);
 		}
 	}
 }

@@ -47,7 +47,12 @@
             	<div>[[error]]</div>
             </template>
             <template is="dom-if" if="{{urldata}}">
-            	<div>[[urldata.title]]</div>
+            	<div>
+					<div>Title: [[urldata.title]]</div>
+					<div>Version: [[urldata.version]]</div>
+					<div>Links: [[urldata.links.length]]</div>
+					<div>Headings: [[urldata.headings.length]]</div>
+            	</div>
             </template>
             <paper-progress     id="progress"></paper-progress>
 		</div>
@@ -74,8 +79,7 @@
         
         onError: function(data) {
 			this.reset();
-			this.error = data.detail.error;
-			console.log(data);
+			this.error = data.detail.request.xhr.getResponseHeader('X-Reason');
         },        
         
         onResponse: function(data) {
