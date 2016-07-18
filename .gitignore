@@ -1,2 +1,4 @@
 .factorypath
 dependency-reduced-pom.xml
+*~
+bower/
