@@ -26,6 +26,7 @@ public abstract class ApplicationSupport
 		throws Exception
 	{
 		port(8000);
+		staticFiles.location("/public"); // Static files
 		after((request, response) -> response.header("Content-Encoding", "gzip"));
 		registerRoutes();
 	}
