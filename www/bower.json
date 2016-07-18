@@ -1,0 +1,23 @@
+{
+  "name": "UrlAnalyser",
+  "version": "1.0.0",
+  "authors": [
+    "Leandro Cruz <leandro.saad@gmail.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "polymer/polymer#^1.4.0",
+    "iron-elements": "polymerelements/iron-elements#^1.0.10",
+    "paper-elements": "polymerelements/paper-elements#^1.0.7"
+  }
+}
