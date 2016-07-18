@@ -8,11 +8,11 @@ import org.immutables.value.Value;
 @Value.Immutable
 public interface UrlData
 {
-	Optional<String> version();
+	Optional<String> getVersion();
 	
-	Optional<String> title();
+	Optional<String> getTitle();
 
-	List<Link> links();
+	List<Link> getLinks();
 	
-	List<Heading> headings();
+	List<Heading> getHeadings();
 }

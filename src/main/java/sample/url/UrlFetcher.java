@@ -5,5 +5,6 @@ import java.net.URL;
 
 public interface UrlFetcher
 {
-	InputStream fetch(URL locator);
+	InputStream fetch(URL locator)
+		throws UrlFetcherException;
 }

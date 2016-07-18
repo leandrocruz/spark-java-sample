@@ -27,15 +27,9 @@ public class UrlAnalyserImpl
 	public UrlData analyse(String url)
 		throws UrlAnalyserException
 	{
-		final URL    locator  = urlFrom(url);
-		final String protocol = locator.getProtocol();
-		if(!"http".equals(protocol) && !"https".equals(protocol))
-		{
-			throw new UrlAnalyserException("Bad protocol: " + protocol);
-		}
-
-		final InputStream input = fetcher.fetch(locator);
-		final String      html  = toString(input);
+		final URL         locator = urlFrom(url);
+		final InputStream input   = fetcher.fetch(locator);
+		final String      html    = toString(input);
 		return parser.parse(html);
 	}
 

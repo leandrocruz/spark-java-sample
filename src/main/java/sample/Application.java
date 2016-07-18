@@ -4,12 +4,15 @@ import static spark.Spark.get;
 
 import java.io.InputStream;
 
+import org.apache.commons.lang3.StringUtils;
+
 import sample.url.UrlAnalyser;
 import spark.Request;
 import spark.Response;
 import xingu.container.ContainerUtils;
 import xingu.container.Inject;
 import xingu.factory.Factory;
+import xingu.lang.NotImplementedYet;
 
 public class Application
 	extends ApplicationSupport
@@ -41,7 +44,21 @@ public class Application
 	Object analyse(Request request, Response response)
 		throws Exception
 	{
-		final String url  = request.params(":url");
+		String url = request.params(":url");
+		if(StringUtils.isEmpty(url))
+		{
+			throw new NotImplementedYet("Parameter 'url' is missing");
+		}
+		
+		if(!url.startsWith("http") && !url.startsWith("https"))
+		{
+			int index = url.indexOf(":");
+			if(index > 0)
+			{
+				throw new NotImplementedYet("Unknown protocol: " + url.substring(0, index));
+			}
+			url = "http://" + url;
+		}
 		return analyser.analyse(url);
 	}
 }

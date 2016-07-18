@@ -29,6 +29,11 @@
 			<version>${jackson}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
+			<version>2.6.3</version>
+		</dependency>		
+		<dependency>
 			<groupId>xingu</groupId>
 			<artifactId>xingu-creator</artifactId>
 			<version>${xingu}</version>

@@ -42,8 +42,8 @@ public class UrlAnalyserTest
 		throws Exception
 	{
 		final UrlData data = analyser.analyse("http://any.com");
-		assertEquals(Optional.empty(), data.version());
-		assertEquals(Optional.empty(), data.title());
+		assertEquals(Optional.empty(), data.getVersion());
+		assertEquals(Optional.empty(), data.getTitle());
 	}
 
 	@Test(expected=NotImplementedYet.class)
@@ -64,11 +64,11 @@ public class UrlAnalyserTest
 		when(fetcher.fetch(new URL(url))).thenReturn(input);
 		
 		final UrlData data = analyser.analyse(url);
-		assertEquals(Optional.of("The Linux Kernel Archives"), data.title());
-		assertEquals("5+", data.version().get());
+		assertEquals(Optional.of("The Linux Kernel Archives"), data.getTitle());
+		assertEquals("5+", data.getVersion().get());
 
 		/* Links */
-		final List<Link> links = data.links();
+		final List<Link> links = data.getLinks();
 		assertEquals(117, links.size());
 		
 		final List<Link> external = links.stream().filter(link -> link.isExternal()).collect(Collectors.toList());
@@ -78,10 +78,10 @@ public class UrlAnalyserTest
 		assertEquals(8, relative.size());
 
 		/* Headings */
-		final List<Heading> headings = data.headings();
+		final List<Heading> headings = data.getHeadings();
 		assertEquals(3, headings.size());
-		assertEquals(1, headings.get(0).level());
-		assertEquals(2, headings.get(1).level());
-		assertEquals(2, headings.get(2).level());
+		assertEquals(1, headings.get(0).getLevel());
+		assertEquals(2, headings.get(1).getLevel());
+		assertEquals(2, headings.get(2).getLevel());
 	}
 }

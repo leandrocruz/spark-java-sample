@@ -5,7 +5,7 @@ import org.immutables.value.Value;
 @Value.Immutable
 public interface Heading
 {
-	int level();
+	int getLevel();
 	
-	String text();
+	String getText();
 }

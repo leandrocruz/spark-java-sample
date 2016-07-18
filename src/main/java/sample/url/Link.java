@@ -6,13 +6,13 @@ import org.immutables.value.Value;
 @Value.Immutable
 public interface Link
 {
-	String href();
+	String getHref();
 	
-	String text();
+	String getText();
 	
 	default boolean isExternal()
 	{
-		String href = href();
+		String href = getHref();
 		if(StringUtils.isEmpty(href))
 		{
 			return false;
