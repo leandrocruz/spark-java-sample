@@ -34,32 +34,17 @@ public class ApplicationTest
 	}
 	
 	@Test
-	public void testError()
+	public void testAnalyse()
 		throws Exception
 	{
-		final HttpResponse<String> resp = Unirest.get("http://localhost:8000/err").asString();
-		assertEquals(500, resp.getStatus());
-	}
-
-	@Test
-	public void testCustomer()
-		throws Exception
-	{
-		final HttpResponse<JsonNode> resp = Unirest.get("http://localhost:8000/customer/leandro/40").asJson();
+		final HttpResponse<JsonNode> resp = Unirest.get("http://localhost:8000/analyse/google.com").asJson();
 		assertEquals(200, resp.getStatus());
 		
-		//{"name":"leandro","age":1,"colors":["blue","gray","green"]}
 		final JSONObject obj = resp.getBody().getObject();
-		assertEquals("leandro", obj.getString("name"));
-		assertEquals(40, obj.getInt("age"));
-		assertEquals(String.join(",", new String[] {"\"blue\"", "\"gray\"", "\"green\""}), obj.getJSONArray("colors").join(","));
-	}
+		assertEquals("Google", obj.getString("title"));
+		assertEquals("5+", obj.getString("version"));
+		assertEquals(20, obj.getJSONArray("links").length());
+		assertEquals(0, obj.getJSONArray("headings").length());
 
-	@Test
-	public void testBadCustomerAge()
-		throws Exception
-	{
-		final HttpResponse<String> resp = Unirest.get("http://localhost:8000/customer/leandro/a").asString();
-		assertEquals(500, resp.getStatus());
 	}
 }
