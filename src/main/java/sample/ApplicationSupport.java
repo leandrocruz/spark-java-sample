@@ -73,6 +73,7 @@ public abstract class ApplicationSupport
 			{
 				logger.error("Error handling request", e);
 				response.status(500);
+				response.header("X-Reason", e.getMessage());
 				return "Error handling request: " + e.getMessage(); //maybe report the exception to the client?
 			}
 		}

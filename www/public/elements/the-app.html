@@ -43,12 +43,19 @@
                 <paper-input    id="input"  error-message="Invalid input!" label="Enter a valid url"></paper-input>
                 <paper-button   id="button" raised on-click="analyse">Analyse</paper-button>
             </div>
+            <template is="dom-if" if="{{error}}">
+            	<div>[[error]]</div>
+            </template>
+            <template is="dom-if" if="{{urldata}}">
+            	<div>[[urldata.title]]</div>
+            </template>
             <paper-progress     id="progress"></paper-progress>
 		</div>
         <iron-ajax
             id="ajax"
             handle-as="json"
-            on-response="handleResponse"
+            on-response="onResponse"
+            on-error="onError"
             debounce-duration="300"></iron-ajax>
     </template>
 </dom-module>
@@ -56,7 +63,28 @@
     Polymer({
         is: 'the-app',
         isRunning: false,
+        
+        reset: function() {
+            this.$.progress.indeterminate = false;
+            this.$.button.innerHTML = 'analyse';
+            this.isRunning = false;
+        	this.error     = false;
+        	this.urldata   = false;
+        },
+        
+        onError: function(data) {
+			this.reset();
+			this.error = data.detail.error;
+			console.log(data);
+        },        
+        
+        onResponse: function(data) {
+        	this.reset();
+        	this.urldata = data.detail.response;
+        },
+        
         analyse: function(e) {
+    		this.reset();
             var url = this.$.input.value;
             this.$.input.invalid = !validator.isURL(url);
             if(!this.isRunning)
@@ -66,13 +94,12 @@
                     this.$.progress.indeterminate = true;
                     this.$.button.innerHTML = 'stop';
                     this.isRunning = true;
+                    
+                    var location = window.location;
+                    var ajax = this.$.ajax; 
+					ajax.url = location + 'analyse/' + url;
+                	ajax.generateRequest();
                 }
-            }
-            else
-            {
-                this.$.progress.indeterminate = false;
-                this.$.button.innerHTML = 'analyse';
-                this.isRunning = false;
             }
         }
     });
