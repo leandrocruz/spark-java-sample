@@ -11,10 +11,12 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
-import sample.Application;
 import xingu.container.ContainerUtils;
 import xingu.factory.Factory;
 
+/*
+ * This test only works if the test machine has network access to google.com 
+ */
 public class ApplicationTest
 {
 	private static Application app;

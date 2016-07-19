@@ -12,13 +12,18 @@ import org.jsoup.select.Elements;
 
 import sample.http.DocumentParser;
 import sample.http.Heading;
-import sample.http.Link;
-import sample.http.UrlData;
 import sample.http.ImmutableHeading;
 import sample.http.ImmutableLink;
 import sample.http.ImmutableUrlData;
+import sample.http.Link;
+import sample.http.UrlData;
 import xingu.lang.NotImplementedYet;
 
+/*
+ * This is a simple implementation of a DocumentParser based on JSoup.
+ * If performance is a concern, other DocumentParser should be used,
+ * possibly parsing the document using a lenient sax parser so the UrlData object can be constructed is a single parsing step.
+ */
 public class JSoupDocumentParser
 	implements DocumentParser
 {

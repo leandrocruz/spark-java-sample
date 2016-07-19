@@ -1,7 +1,9 @@
 package sample;
 
 import static spark.Spark.after;
-import static spark.Spark.*;
+import static spark.Spark.port;
+import static spark.Spark.staticFiles;
+import static spark.Spark.stop;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.slf4j.Logger;

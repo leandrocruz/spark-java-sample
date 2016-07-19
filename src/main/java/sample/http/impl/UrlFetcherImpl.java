@@ -9,6 +9,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import sample.http.UrlFetcher;
 import sample.http.UrlFetcherException;
 
+/*
+ * This is the default implementation of the UrlFetcher based on Unirest, a simple http client.
+ * For production environments it's suggested to use other http client libraries, like Apache Http Client
+ * or even libcurl (for simplified handling of ssl certificates)  
+ */
 public class UrlFetcherImpl
 	implements UrlFetcher
 {
