@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javaslang.control.Either;
@@ -48,11 +47,28 @@ public class UrlAnalyserTest
 	}
 
 	@Test
-	@Ignore
+	public void testUnknownHost()
+		throws Exception
+	{
+		when(fetcher.fetch(any(URL.class))).thenReturn(ImmutableFetchResponse.builder().statusCode(-1).build());
+		final Either<Integer, UrlData> either = analyser.analyse("http://any.com");
+		assertTrue(either.isLeft());
+		assertEquals(Integer.valueOf(-1), either.getLeft());
+	}
+
+	@Test
 	public void testEmptyDocument()
 		throws Exception
 	{
-		final Either<Integer, UrlData> data = analyser.analyse("http://any.com");
+		when(fetcher.fetch(any(URL.class))).thenReturn(toFetchResponse(200, IOUtils.toInputStream("")));
+		final Either<Integer, UrlData> either = analyser.analyse("http://any.com");
+		assertTrue(either.isRight());
+		
+		final UrlData data = either.get();
+		assertEquals(Optional.empty(), data.getTitle());
+		assertEquals(Optional.empty(), data.getVersion());
+		assertTrue(data.getLinks().isEmpty());
+		assertTrue(data.getHeadings().isEmpty());
 	}
 
 	private FetchResponse toFetchResponse(int code, InputStream is)
