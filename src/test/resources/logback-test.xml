@@ -9,7 +9,7 @@
 	</appender>
 
 	<root level="info">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="off" />
 	</root>
 	
 	<logger name="xingu" level="OFF" additivity="false" />
