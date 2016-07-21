@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import sample.http.commons.HttpUtils;
 import sample.http.fetcher.FetchResponse;
 import sample.http.fetcher.ImmutableFetchResponse;
 import sample.http.fetcher.UrlFetcher;
@@ -29,7 +30,7 @@ public class UrlFetcherImpl
 	{
 		handler = response -> {
 			final int status = response.getStatusLine().getStatusCode();
-			if(status >= 200 && status < 300)
+			if(HttpUtils.isOk(status))
 			{
 				final HttpEntity entity = response.getEntity();
 				final byte[]     array  = EntityUtils.toByteArray(entity);

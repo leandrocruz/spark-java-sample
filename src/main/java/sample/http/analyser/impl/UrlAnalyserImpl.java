@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import javaslang.control.Either;
 import sample.http.analyser.UrlAnalyser;
 import sample.http.analyser.UrlAnalyserException;
+import sample.http.commons.HttpUtils;
 import sample.http.commons.UrlData;
 import sample.http.fetcher.FetchResponse;
 import sample.http.fetcher.UrlFetcher;
@@ -38,7 +39,7 @@ public class UrlAnalyserImpl
 		final URL           locator    = urlFrom(url);
 		final FetchResponse response   = fetcher.fetch(locator);
 		final int           statusCode = response.statusCode();
-		if(statusCode == 200)
+		if(HttpUtils.isOk(statusCode))
 		{
 			final Optional<InputStream> input = response.inputStream();
 			final String                html  = toString(input.get());

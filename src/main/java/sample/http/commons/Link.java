@@ -1,6 +1,5 @@
 package sample.http.commons;
 
-import org.apache.commons.lang3.StringUtils;
 import org.immutables.value.Value;
 
 @Value.Immutable
@@ -13,10 +12,6 @@ public interface Link
 	default boolean isExternal()
 	{
 		String href = getHref();
-		if(StringUtils.isEmpty(href))
-		{
-			return false;
-		}
-		return href.startsWith("http") || href.startsWith("https");
+		return HttpUtils.urlStartsWithHttpOrHttps(href);
 	}
 }

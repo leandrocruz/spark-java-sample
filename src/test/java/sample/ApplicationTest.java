@@ -47,6 +47,5 @@ public class ApplicationTest
 		assertEquals("5+", obj.getString("version"));
 		assertEquals(20, obj.getJSONArray("links").length());
 		assertEquals(0, obj.getJSONArray("headings").length());
-
 	}
 }

@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javaslang.control.Either;
 import sample.http.analyser.UrlAnalyser;
+import sample.http.commons.HttpUtils;
 import sample.http.commons.UrlData;
 import spark.Request;
 import spark.Response;
@@ -72,7 +73,7 @@ public class Application
 			throw new NotImplementedYet("Parameter 'url' is missing");
 		}
 
-		if(url.startsWith("http") || url.startsWith("https"))
+		if(HttpUtils.urlStartsWithHttpOrHttps(url))
 		{
 			return url;
 		}
