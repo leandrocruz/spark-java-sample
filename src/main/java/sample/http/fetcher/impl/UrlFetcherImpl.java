@@ -1,14 +1,12 @@
 package sample.http.fetcher.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.net.UnknownHostException;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,30 +27,24 @@ public class UrlFetcherImpl
 	public void initialize()
 		throws Exception
 	{
-		handler = new ResponseHandler<FetchResponse>()
-		{
-			@Override
-			public FetchResponse handleResponse(final HttpResponse response)
-				throws IOException
+		handler = response -> {
+			final int status = response.getStatusLine().getStatusCode();
+			if(status >= 200 && status < 300)
 			{
-				final int status = response.getStatusLine().getStatusCode();
-				if(status >= 200 && status < 300)
-				{
-					final HttpEntity entity = response.getEntity();
-					final byte[]     array  = EntityUtils.toByteArray(entity);
-					return ImmutableFetchResponse
-							.builder()
-							.inputStream(new ByteArrayInputStream(array))
-							.statusCode(status)
-							.build();
-				}
-				else
-				{
-					return ImmutableFetchResponse
-							.builder()
-							.statusCode(status)
-							.build();
-				}
+				final HttpEntity entity = response.getEntity();
+				final byte[]     array  = EntityUtils.toByteArray(entity);
+				return ImmutableFetchResponse
+						.builder()
+						.inputStream(new ByteArrayInputStream(array))
+						.statusCode(status)
+						.build();
+			}
+			else
+			{
+				return ImmutableFetchResponse
+						.builder()
+						.statusCode(status)
+						.build();
 			}
 		};
 	}
@@ -65,6 +57,9 @@ public class UrlFetcherImpl
 		final CloseableHttpClient client = getHttpClient();
 		try
 		{
+			/*
+			 * TODO: add network timeout
+			 */
 			return client.execute(new HttpGet(url), handler);
 		}
 		catch(UnknownHostException e)
