@@ -9,6 +9,8 @@ public interface RestResponse
 {
 	boolean isError();
 	
+	Optional<Integer> getCode();
+	
 	Optional<String> getMessage();
 	
 	Optional<Object> getPayload();

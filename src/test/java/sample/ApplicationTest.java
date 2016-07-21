@@ -42,7 +42,7 @@ public class ApplicationTest
 		final HttpResponse<JsonNode> resp = Unirest.get("http://localhost:8000/analyse?u=google.com").asJson();
 		assertEquals(200, resp.getStatus());
 		
-		final JSONObject obj = resp.getBody().getObject();
+		final JSONObject obj = resp.getBody().getObject().getJSONObject("payload");
 		assertEquals("Google", obj.getString("title"));
 		assertEquals("5+", obj.getString("version"));
 		assertEquals(20, obj.getJSONArray("links").length());

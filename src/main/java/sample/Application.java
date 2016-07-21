@@ -49,11 +49,16 @@ public class Application
 	{
 		final String url = validUrlOrError(request);		
 		final Either<Integer, UrlData> either = analyser.analyse(url);
-		final Optional<UrlData> payload = either.isLeft() ? Optional.empty() : Optional.of(either.get());
-		final Optional<String>  message = either.isLeft() ? Optional.of("Error loading url: " + either.getLeft()) : Optional.empty();
+		
+		final boolean isError = either.isLeft();
+		final Optional<Integer> code    = isError ? Optional.of(either.getLeft()) : Optional.empty();
+		final Optional<String>  message = isError ? Optional.of("Error loading url: " + url) : Optional.empty();
+		final Optional<UrlData> payload = isError ? Optional.empty() : Optional.of(either.get());
+
 		return ImmutableRestResponse
 				.builder()				
-				.isError(either.isLeft())
+				.isError(isError)
+				.code(code)
 				.message(message)
 				.payload(payload)
 				.build();

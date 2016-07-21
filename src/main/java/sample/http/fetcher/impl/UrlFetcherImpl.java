@@ -58,11 +58,10 @@ public class UrlFetcherImpl
 	{
 		CloseableHttpClient client = HttpClients.createDefault();
 		ResponseHandler<FetchResponse> handler = createHandler();
+		final String url = locator.toExternalForm();
 		try
 		{
-			final String url = locator.toExternalForm();
 			return client.execute(new HttpGet(url), handler);
-
 		}
 		catch(UnknownHostException e)
 		{
@@ -70,7 +69,7 @@ public class UrlFetcherImpl
 		}
 		catch(Exception e)
 		{
-			throw new UrlFetcherException("Error fetching url: " + locator, e);
+			throw new UrlFetcherException("Error fetching url: " + url, e);
 		}
 		finally
 		{

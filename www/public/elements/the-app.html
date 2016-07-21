@@ -84,7 +84,17 @@
         
         onResponse: function(data) {
         	this.reset();
-        	this.urldata = data.detail.response;
+        	var response = data.detail.response;
+        	if(response.error)
+        	{
+        		var errorCode = response.code;
+        		var url       = this.$.input.value;
+        		this.error = errorCode == -1 ? "Can't resolve address '" + url + "'" : response.message + ". Http status code is: " + errorCode;
+        	}
+        	else
+        	{
+        		this.urldata = response.payload;
+        	}
         },
         
         analyse: function(e) {
