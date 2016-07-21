@@ -1,4 +1,4 @@
-package sample.http;
+package sample.http.commons;
 
 import org.immutables.value.Value;
 

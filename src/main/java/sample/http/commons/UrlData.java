@@ -1,4 +1,4 @@
-package sample.http;
+package sample.http.commons;
 
 import java.util.List;
 import java.util.Optional;

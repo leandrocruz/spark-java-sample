@@ -1,19 +1,22 @@
-package sample.http.impl;
+package sample.http.analyser.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sample.http.DocumentParser;
-import sample.http.UrlAnalyser;
-import sample.http.UrlAnalyserException;
-import sample.http.UrlData;
-import sample.http.UrlFetcher;
+import javaslang.control.Either;
+import sample.http.analyser.UrlAnalyser;
+import sample.http.analyser.UrlAnalyserException;
+import sample.http.commons.UrlData;
+import sample.http.fetcher.FetchResponse;
+import sample.http.fetcher.UrlFetcher;
+import sample.http.parser.DocumentParser;
 import xingu.container.Inject;
 
 public class UrlAnalyserImpl
@@ -28,14 +31,23 @@ public class UrlAnalyserImpl
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Override
-	public UrlData analyse(String url)
+	public Either<Integer, UrlData> analyse(String url)
 		throws UrlAnalyserException
 	{
 		logger.info("Analysing url: '{}'", url);
-		final URL         locator = urlFrom(url);
-		final InputStream input   = fetcher.fetch(locator);
-		final String      html    = toString(input);
-		return parser.parse(html);
+		final URL           locator    = urlFrom(url);
+		final FetchResponse response   = fetcher.fetch(locator);
+		final int           statusCode = response.statusCode();
+		if(statusCode == 200)
+		{
+			final Optional<InputStream> input = response.inputStream();
+			final String                html  = toString(input.get());
+			return Either.right(parser.parse(html));
+		}
+		else
+		{
+			return Either.left(statusCode);
+		}
 	}
 
 	private String toString(InputStream input)

@@ -3,10 +3,13 @@ package sample;
 import static spark.Spark.get;
 
 import java.io.InputStream;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sample.http.UrlAnalyser;
+import javaslang.control.Either;
+import sample.http.analyser.UrlAnalyser;
+import sample.http.commons.UrlData;
 import spark.Request;
 import spark.Response;
 import xingu.container.ContainerUtils;
@@ -41,24 +44,39 @@ public class Application
 		get("/analyse", handle((req, res) -> analyse(req, res)));
 	}
 
-	Object analyse(Request request, Response response)
+	private RestResponse analyse(Request request, Response response)
 		throws Exception
+	{
+		final String url = validUrlOrError(request);		
+		final Either<Integer, UrlData> either = analyser.analyse(url);
+		final Optional<UrlData> payload = either.isLeft() ? Optional.empty() : Optional.of(either.get());
+		final Optional<String>  message = either.isLeft() ? Optional.of("Error loading url: " + either.getLeft()) : Optional.empty();
+		return ImmutableRestResponse
+				.builder()				
+				.isError(either.isLeft())
+				.message(message)
+				.payload(payload)
+				.build();
+	}
+
+	private String validUrlOrError(Request request)
 	{
 		String url = request.queryMap().get("u").value();
 		if(StringUtils.isEmpty(url))
 		{
 			throw new NotImplementedYet("Parameter 'url' is missing");
 		}
-		
-		if(!url.startsWith("http") && !url.startsWith("https"))
+
+		if(url.startsWith("http") || url.startsWith("https"))
 		{
-			int index = url.indexOf(":");
-			if(index > 0)
-			{
-				throw new NotImplementedYet("Unknown protocol: " + url.substring(0, index));
-			}
-			url = "http://" + url;
+			return url;
 		}
-		return analyser.analyse(url);
+
+		int index = url.indexOf(":");
+		if(index > 0)
+		{
+			throw new NotImplementedYet("Unknown protocol: " + url.substring(0, index));
+		}
+		return "http://" + url;
 	}
 }

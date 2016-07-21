@@ -1,4 +1,4 @@
-package sample.http;
+package sample.http.analyser;
 
 public class UrlAnalyserException
 	extends RuntimeException

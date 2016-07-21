@@ -1,10 +1,9 @@
-package sample.http;
+package sample.http.fetcher;
 
-import java.io.InputStream;
 import java.net.URL;
 
 public interface UrlFetcher
 {
-	InputStream fetch(URL locator)
+	FetchResponse fetch(URL locator)
 		throws UrlFetcherException;
 }
