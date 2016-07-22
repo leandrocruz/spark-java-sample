@@ -5,6 +5,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.activity.Startable;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ResponseHandler;
@@ -20,10 +21,26 @@ import sample.http.fetcher.UrlFetcher;
 import sample.http.fetcher.UrlFetcherException;
 
 public class UrlFetcherImpl
-	implements UrlFetcher, Initializable
+	implements UrlFetcher, Initializable, Startable
 {
 	private ResponseHandler<FetchResponse> handler;
 	
+	private CloseableHttpClient client;
+
+	@Override
+	public void start()
+		throws Exception
+	{
+		this.client = HttpClients.createDefault();
+	}
+
+	@Override
+	public void stop()
+		throws Exception
+	{
+		IOUtils.closeQuietly(this.client);
+	}
+
 	@Override
 	public void initialize()
 		throws Exception
@@ -55,7 +72,6 @@ public class UrlFetcherImpl
 		throws UrlFetcherException
 	{
 		final String url = locator.toExternalForm();
-		final CloseableHttpClient client = getHttpClient();
 		try
 		{
 			/*
@@ -71,17 +87,5 @@ public class UrlFetcherImpl
 		{
 			throw new UrlFetcherException("Error fetching url: " + url, e);
 		}
-		finally
-		{
-			IOUtils.closeQuietly(client);
-		}
-	}
-
-	private CloseableHttpClient getHttpClient()
-	{
-		/*
-		 * TODO: reuse http client
-		 */
-		return HttpClients.createDefault();
 	}
 }
