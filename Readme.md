@@ -38,20 +38,23 @@ You should see the log output in your console:
 > 22/07/2016 15:56:40 [Thread-1] INFO  o.e.j.s.ServerConnector Started ServerConnector@12d11bed{HTTP/1.1,[http/1.1]}{0.0.0.0:8000}  
 > 22/07/2016 15:56:40 [Thread-1] INFO  o.e.j.server.Server     Started @566ms
 
-Point your browser to <a href="http://localhost:8000">localhost:8000</a> and start playing, or query the service using curl: **curl -i  http://localhost:8000/analyse?u=http://google.com**
+Point your browser to <a href="http://localhost:8000">localhost:8000</a> and start playing, or query the service using curl: **curl -i  http://localhost:8000/analyse?u=http://google.com**.
 
 ## Improvements ##
-1. One major improvement would consider replacing jsoup by a lenient sax parser so all document information would be built on a single pass.
+1. Consider replacing jsoup by a lenient sax parser so all document information would be extracted on a single pass.
 
-2. Other improvement would use a asynchronous implementation of the service to extract the document data and push the results to the client, specially when implementing link checking (`Are there any inaccessible links and how many?`)
+2. Use a asynchronous implementation of the service to extract the document data and push the results to the client, specially when implementing link checking (`Are there any inaccessible links and how many?`).
 
 3. Handle <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">html imports</a> and other types of client side rendering.
 
+4. <a href="https://github.com/Polymer/vulcanize">Vulcanize</a> the webapp.
+
 ## Comments ##
-1. Because of time constraints, the current rest endpoint implements only a subset of the assignment. The remaining scope should be simple to implement and would not require substantial "new" knowledge.
+In general, I made some implementation decisions based on time constraints that I have.
+1. The current rest endpoint implements only a subset of the assignment. The remaining scope should be simple to implement and would not require substantial "new" knowledge.
 
-2. I've decided to deliver a self-contained/self-hosted web application, not a war archive. The deliverable format might be changed to a war file easily, but again, for the sake of time, I reused a simple template based on <a href="sparkjava.com">spark java</a>
+2. I've decided to deliver a self-contained/self-hosted web application, not a war archive. The deliverable format might be changed to a war file easily, but again, for the sake of time, I reused a simple template based on <a href="sparkjava.com">spark java</a>.
 
-3. Today, the definition of what constitutes a login-form is not clear. One can assume that a login form is a form with a nested input field of type *password*, but that might be too simple for current/modern web applications
+3. Today, the definition of what constitutes a login-form is not clear. One can assume that a login form is a form with a nested input field of type *password*, but that might be too simple for current/modern web applications.
 
-4. Dns problems (UnknownHostException) are reported as status code -1
+4. Dns problems (UnknownHostException) are reported as status code -1.
